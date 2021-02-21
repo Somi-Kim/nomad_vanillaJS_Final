@@ -8,11 +8,9 @@ function getWeather(lat, lon) {
     `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
   )
     .then(function (response) {
-      // console.log(response.json);
       return response.json();
     })
     .then(function (json) {
-      // console.log(json);
       const temperature = json.main.temp;
       const place = json.name;
       weather.innerText = `${temperature} @ ${place}`;
@@ -30,8 +28,6 @@ function handleGeoSuccess(position) {
     latitude,
     longitude
   };
-  // const template = document.querySelector("div");
-  // template.innerText = `api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={API_KEY}`;
 
   saveCoords(coordsObj);
 
@@ -39,7 +35,7 @@ function handleGeoSuccess(position) {
 }
 
 function handleGeoError() {
-  console.log("업서 못가져와 그런거업서");
+  console.log("can't get geo info");
 }
 
 function askForCoords() {
@@ -52,7 +48,6 @@ function loadCoords() {
     askForCoords();
   } else {
     const parseCoords = JSON.parse(loadedCoords);
-    // console.log(parseCoords);
     getWeather(parseCoords.latitude, parseCoords.longitude);
   }
 }
